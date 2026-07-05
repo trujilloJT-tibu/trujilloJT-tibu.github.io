@@ -16,8 +16,11 @@
                 <span>📍 Rosario, Santa Fe, Argentina</span> | 
                 <span>📧 trujillocamachog@gmail.com</span> | 
                 <span>📱 +54 9 341 5410522</span> | 
-                <a href="https://linkedin.com/in/jesus-trujilloc" target="_blank">LinkedIn</a> | 
-                <a href="https://github.com/trujilloJT-tibu" target="_blank">GitHub</a>
+                <a href="https://linkedin.com/in/jesus-trujilloc" target="_blank" rel="noopener noreferrer">LinkedIn</a> | 
+                <a href="https://github.com/trujilloJT-tibu" target="_blank" rel="noopener noreferrer">GitHub</a>
+            </div>
+            <div class="contenedor-cta">
+                <a href="CV_Jesus_Trujillo_Ciberseguridad.pdf" download class="boton boton-cv">Descargar CV Profesional (PDF)</a>
             </div>
         </div>
     </header>
@@ -58,8 +61,20 @@
         </aside>
 
         <main class="proyectos">
-            <h2>Ecosistema de Proyectos Integrados</h2>
-            <p class="intro-proyectos">Los siguientes proyectos interactúan de forma nativa a través de una arquitectura de base de datos relacional centralizada, emulando la correlación de eventos de un entorno corporativo real.</p>
+            <section class="tarjeta arquitectura-central">
+                <h2>Ecosistema Core Relacional (Estructura SIEM-GRC)</h2>
+                <p>A diferencia de scripts aislados, este entorno funciona de forma integrada compartiendo telemetría en una base de datos centralizada. Esto permite correlacionar eventos técnicos con análisis de riesgo normativo en tiempo real.</p>
+                <div class="esquema-datos">
+                    <strong>Esquema del Diccionario SQL (ciberdefensa.db):</strong>
+                    <ul>
+                        <li><code>incidentes</code>: Mapea IP, timestamp, payload e indicadores OWASP capturados por el parser.</li>
+                        <li><code>alertas_red</code>: Registra métricas de saturación y eventos de denegación de servicio (DoS) en entornos IoT.</li>
+                        <li><code>auditorias_iso</code>: Almacena logs de cumplimiento técnico-legal e impactos cuantitativos de riesgo corporativo.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <h2>Proyectos Destacados</h2>
             
             <article class="tarjeta proyecto-item">
                 <div class="proyecto-header">
@@ -68,9 +83,19 @@
                     <span class="tag">SQL</span>
                     <span class="tag">OWASP Top 10</span>
                 </div>
-                <p>Desarrollo de un analizador modular de registros de auditoría web para la detección de firmas de ataques críticos (Inyección SQL y Fuerza Bruta). Normaliza la evidencia digital en una base de datos relacional e implementa funciones criptográficas para asegurar la cadena de custodia.</p>
+                <p>Analizador modular de registros de auditoría web para la detección de firmas de ataques críticos (Inyección SQL y Fuerza Bruta). Normaliza la evidencia digital en SQLite e implementa cálculo automatizado de severidad.</p>
+                
+                <div class="proyecto-demo">
+                    <span class="demo-label">⚡ Vista previa de ejecución en consola:</span>
+                    <pre class="consola-mockup">
+[*] Iniciando motor SIEM Log Parser...
+[ALERTA CRÍTICA] SQLi detectado desde la IP 192.168.1.100 -> Guardando en SQL...
+[ALERTA MEDIA] Intento de Fuerza Bruta desde la IP 10.0.0.45 -> Guardando en SQL...
+[+] Análisis finalizado. 2 eventos integrados a ciberdefensa.db.</pre>
+                </div>
+
                 <div class="proyecto-links">
-                    <a href="https://github.com/trujilloJT-tibu/siem-log-parser" target="_blank" class="boton">Ver Código en GitHub</a>
+                    <a href="https://github.com/trujilloJT-tibu/siem-log-parser" target="_blank" rel="noopener noreferrer" class="boton">Ver Código en GitHub</a>
                 </div>
             </article>
 
@@ -81,9 +106,19 @@
                     <span class="tag">Compliance</span>
                     <span class="tag">GRC</span>
                 </div>
-                <p>Sistema automatizado de auditoría y dictamen legal-técnico basado en los controles del Anexo A de la norma ISO/IEC 27001. El motor realiza consultas directas sobre la base de datos de incidentes perimetrales, penalizando de forma automatizada los niveles de cumplimiento organizacionales.</p>
+                <p>Sistema automatizado de auditoría y dictamen legal-técnico basado en controles ISO/IEC 27001. El motor realiza consultas directas sobre las tablas de incidentes, penalizando automáticamente los niveles de cumplimiento organizacionales.</p>
+                
+                <div class="proyecto-demo">
+                    <span class="demo-label">⚡ Vista previa de auditoría técnica integrada:</span>
+                    <pre class="consola-mockup">
+[*] Ejecutando escaneo forense automático en base de datos...
+    -> Alertas SIEM críticas en BD: 1 | Incidentes de red IoT en BD: 1
+[X] CONTROL A.8.20 RECHAZADO AUTOMÁTICAMENTE: Existen alertas DoS activas en la infraestructura.
+Conclusión Legal-Técnica: NO COMPLIANT - Riesgo: CRÍTICO por falta de debida diligencia.</pre>
+                </div>
+
                 <div class="proyecto-links">
-                    <a href="https://github.com/trujilloJT-tibu/iso-27001-compliance" target="_blank" class="boton">Ver Código en GitHub</a>
+                    <a href="https://github.com/trujilloJT-tibu/iso-27001-compliance" target="_blank" rel="noopener noreferrer" class="boton">Ver Código en GitHub</a>
                 </div>
             </article>
 
@@ -94,9 +129,18 @@
                     <span class="tag">Networking</span>
                     <span class="tag">Seguridad IoT</span>
                 </div>
-                <p>Script de monitoreo perimetral enfocado en entornos industriales e IoT/OT. Analiza flujos de tráfico en tiempo real, evalúa umbrales críticos de paquetes por segundo para la mitigación preventiva de ataques de Denegación de Servicio (DoS) e interactúa mediante pipelines de datos con el módulo SIEM.</p>
+                <p>Script de monitoreo perimetral enfocado en entornos industriales e IoT/OT. Analiza flujos de tráfico en tiempo real, evalúa umbrales de paquetes por segundo para mitigar ataques de Denegación de Servicio (DoS) y genera pipelines de datos hacia el SIEM.</p>
+                
+                <div class="proyecto-demo">
+                    <span class="demo-label">⚡ Vista previa de captura de tráfico:</span>
+                    <pre class="consola-mockup">
+[15:10:02] Analizando ráfaga de tráfico N° 1...
+ -> Cámara de Seguridad Principal (192.168.1.50): 185 req/seg | ⚠️ [ALERTA] Anomalía DoS.
+ -> Servidor de Archivos Legales (192.168.1.60): 42 req/seg | [OK] Tráfico Normal.</pre>
+                </div>
+
                 <div class="proyecto-links">
-                    <a href="https://github.com/trujilloJT-tibu/iot-network-monitor" target="_blank" class="boton">Ver Código en GitHub</a>
+                    <a href="https://github.com/trujilloJT-tibu/iot-network-monitor" target="_blank" rel="noopener noreferrer" class="boton">Ver Código en GitHub</a>
                 </div>
             </article>
         </main>
