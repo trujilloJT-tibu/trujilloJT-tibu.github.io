@@ -1,33 +1,46 @@
 import sqlite3
 
 def generar_reporte_incidentes():
-    # Nos conectamos a la base de datos que creó el script anterior
-    conexion = sqlite3.connect('ciberdefensa.db')
-    cursor = conexion.cursor()
-    
-    # Consulta SQL pura para traer los datos ordenados por tipo de ataque
-    consulta_sql = "SELECT ip, fecha, tipo_ataque FROM incidentes ORDER BY tipo_ataque ASC"
-    cursor.execute(consulta_sql)
-    
-    # Recuperamos todas las filas que devolvió la consulta
-    incidentes = cursor.fetchall()
-    
-    # Cerramos la conexión por seguridad y buenas prácticas
-    conexion.close()
-    
-    # Mostramos los resultados de forma prolija en la pantalla
-    print("\n" + "="*60)
+    print("\n" + "="*70)
     print("      REPORTE DE INCIDENTES DE SEGURIDAD - AUDITORÍA ISO 27001")
-    print("="*60)
-    print(f"{'DIRECCIÓN IP':<18} | {'FECHA / HORA':<22} | {'TIPO DE AMENAZA'}")
-    print("-"*60)
+    print("="*70)
     
-    for registro in incidentes:
-        ip, fecha, tipo_ataque = registro
-        print(f"{ip:<18} | {fecha:<22} | {tipo_ataque}")
-        
-    print("="*60)
-    print(f"Total de anomalías registradas en la base de datos: {len(incidentes)}\n")
+    try:
+        with sqlite3.connect('ciberdefensa.db') as conexion:
+            cursor = conexion.cursor()
+            
+            # Consulta Avanzada 1: Consolidado de Ataques Web (SIEM)
+            consulta_siem = "SELECT ip, fecha, tipo_ataque, severidad FROM incidentes ORDER BY severidad DESC, fecha DESC"
+            cursor.execute(consulta_siem)
+            incidentes = cursor.fetchall()
+            
+            print(f"{'DIRECCIÓN IP':<15} | {'FECHA / HORA':<20} | {'TIPO AMENAZA':<15} | {'SEVERIDAD'}")
+            print("-" * 70)
+            for reg in incidentes:
+                print(f"{reg[0]:<15} | {reg[1]:<20} | {reg[2]:<15} | {reg[3]}")
+                
+            print(f"\n[i] Total de anomalías web en base de datos: {len(incidentes)}")
+            print("="*70)
+            
+            # Consulta Avanzada 2 (Mapeo de Red IoT): Métricas agregadas de atacantes recurrentes
+            print("\n      TOP IPS CON ALERTAS DE ANOMALÍAS DE RED (MONITOREO IoT)")
+            print("-" * 70)
+            consulta_iot = """
+                SELECT ip, dispositivo, COUNT(*) as cantidad, tipo_alerta 
+                FROM alertas_red 
+                GROUP BY ip 
+                ORDER BY cantidad DESC
+            """
+            cursor.execute(consulta_iot)
+            alertas = cursor.fetchall()
+            
+            print(f"{'DIRECCIÓN IP':<15} | {'DISPOSITIVO OBJETIVO':<30} | {'ALERTAS':<8} | {'VECTOR'}")
+            print("-" * 70)
+            for alerta in alertas:
+                print(f"{alerta[0]:<15} | {alerta[1]:<30} | {alerta[2]:<8} | {alerta[3]}")
+                
+    except sqlite3.Error as e:
+        print(f"[-] Error al generar reportes de auditoría forense: {e}")
 
 if __name__ == "__main__":
     generar_reporte_incidentes()

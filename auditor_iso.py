@@ -1,92 +1,112 @@
 import sqlite3
 from datetime import datetime
 
-# 1. Creamos la base de datos para las auditorías de cumplimiento
-def preparar_bd_auditoria():
-    conexion = sqlite3.connect('ciberdefensa.db') # Usamos la misma BD para centralizar todo
-    cursor = conexion.cursor()
-    cursor.execute('''
-        CREATE TABLE IF NOT EXISTS auditorias_iso (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            fecha TEXT,
-            empresa TEXT,
-            controles_aprobados INTEGER,
-            controles_fallidos INTEGER,
-            porcentaje_cumplimiento REAL,
-            estado_legal TEXT
-        )
-    ''')
-    conexion.commit()
-    conexion.close()
+def comprobar_incidentes_activos():
+    """Auditoría de Datos automatizada: Analiza fallas en la infraestructura"""
+    try:
+        with sqlite3.connect('ciberdefensa.db') as conexion:
+            cursor = conexion.cursor()
+            cursor.execute("SELECT COUNT(*) FROM incidentes WHERE severidad='ALTA'")
+            incidentes_criticos = cursor.fetchone()[0]
+            
+            cursor.execute("SELECT COUNT(*) FROM alertas_red")
+            alertas_red = cursor.fetchone()[0]
+            
+            return incidentes_criticos, alertas_red
+    except sqlite3.Error:
+        return 0, 0
 
-# 2. Función para guardar el resultado del reporte legal-técnico
-def guardar_auditoria(empresa, aprobados, fallidos, porcentaje, estado):
-    conexion = sqlite3.connect('ciberdefensa.db')
-    cursor = conexion.cursor()
-    fecha_actual = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-    cursor.execute('''
-        INSERT INTO auditorias_iso (fecha, empresa, controles_aprobados, controles_fallidos, porcentaje_cumplimiento, estado_legal)
-        VALUES (?, ?, ?, ?, ?, ?)
-    ''', (fecha_actual, empresa, aprobados, fallidos, porcentaje, estado))
-    conexion.commit()
-    conexion.close()
-
-# 3. El motor del cuestionario de cumplimiento (ISO 27001)
 def ejecutar_auditoria():
-    preparar_bd_auditoria()
-    
     print("\n" + "="*60)
-    print("   SISTEMA AUTOMATIZADO DE AUDITORÍA DE COMPLIANCE - ISO 27001")
+    print("   ISO/IEC 27001 COMPLIANCE AUDITOR TOOL - DICTAMEN LEGAL")
     print("="*60)
     
-    empresa = input("Nombre de la organización a evaluar: ")
+    empresa = input("[?] Ingrese el nombre de la organización a auditar: ").strip()
+    if not empresa: empresa = "Consultora Standard"
     
-    # Lista de controles clave de la norma ISO 27001
+    # Mapeo de controles según el Anexo A de ISO 27001:2022
     controles = [
-        "¿La empresa cuenta con una Política de Seguridad de la Información documentada y firmada? (A.5.1.1)",
-        "¿Se realizan análisis de vulnerabilidades y pruebas de penetración periódicas? (A.12.6.1)",
-        "¿Existe un registro formal y actualizado de incidentes de seguridad? (A.16.1.4)",
-        "¿El acceso a las bases de datos de producción está restringido y cifrado? (A.9.4.1)",
-        "¿Se cumple estrictamente con la Ley de Protección de Datos Personales en el almacenamiento? (A.18.1.1)"
+        "A.5.15 - ¿Se cuenta con una política de control de accesos reglamentada?",
+        "A.8.20 - ¿Se implementan controles de seguridad en redes perimetrales?",
+        "A.8.16 - ¿Se realiza monitoreo, recolección y análisis de logs de eventos?"
     ]
     
     aprobados = 0
     fallidos = 0
     
-    print("\nResponda con 'S' para SÍ o 'N' para NO a los siguientes controles regulatorios:\n")
+    # Integración de Auditoría Técnica Automática
+    inc_web, alc_red = comprobar_incidentes_activos()
+    print(f"\n[*] Ejecutando escaneo forense automático en base de datos...")
+    print(f"    -> Alertas SIEM críticas en BD: {inc_web}")
+    print(f"    -> Incidentes de red IoT en BD: {alc_red}")
     
-    for i, control in enumerate(controles, 1):
-        respuesta = input(f"Control {i}: {control} [S/N]: ").strip().upper()
-        if respuesta == 'S':
-            aprobados += 1
-        else:
-            fallidos += 1
-            
-    # Cálculos estadísticos básicos de riesgo
-    total_controles = len(controles)
-    porcentaje_cumplimiento = (aprobados / total_controles) * 100
+    print("\n[!] Comience el cuestionario normativo complementario:\n")
     
-    # Criterio legal/tecnológico para el dictamen
-    if porcentaje_cumplimiento == 100:
-        estado_legal = "Cumplimiento Total - Riesgo Bajo"
-    elif porcentaje_cumplimiento >= 60:
-        estado_legal = "Cumplimiento Parcial - Riesgo Moderado (Requiere plan de acción)"
-    else:
-        estado_legal = "No Compliant - Riesgo Crítico (Pasible de sanciones legales)"
+    # Evaluación Control 1
+    resp = input(f"{controles[0]} [S/N]: ").strip().upper()
+    if resp == 'S': aprobados += 1 
+    else: fallidos += 1
         
-    # Guardamos en SQL
-    guardar_auditoria(empresa, aprobados, fallidos, porcentaje_cumplimiento, estado_legal)
+    # Evaluación Control 2 (Afectado automáticamente por alertas IoT)
+    print(f"{controles[1]}")
+    if alc_red > 0:
+        print("    [X] CONTROL RECHAZADO AUTOMÁTICAMENTE: Existen alertas DoS de red sin contener en base de datos.")
+        fallidos += 1
+    else:
+        resp = input("    Verificación manual necesaria [S/N]: ").strip().upper()
+        if resp == 'S': aprobados += 1
+        else: fallidos += 1
+            
+    # Evaluación Control 3 (Afectado automáticamente por SIEM)
+    print(f"{controles[2]}")
+    if inc_web > 0:
+        print("    [X] CONTROL RECHAZADO AUTOMÁTICAMENTE: Registros SIEM exponen brechas de inyección SQL activas.")
+        fallidos += 1
+    else:
+        resp = input("    Verificación manual necesaria [S/N]: ").strip().upper()
+        if resp == 'S': aprobados += 1
+        else: fallidos += 1
+
+    # Análisis de Riesgo Cualitativo y Dictamen Legal
+    total_controles = len(controles)
+    porcentaje = (aprobados / total_controles) * 100
     
-    # Mostrar dictamen en pantalla
-    print("\n" + "-"*60)
-    print(f" RESULTADO DICTAMEN LEGAL-TÉCNICO PARA: {empresa.upper()}")
-    print("-"*60)
-    print(f"Controles Acreditados: {aprobados}/{total_controles}")
-    print(f"Controles No Acreditados: {fallidos}/{total_controles}")
-    print(f"Porcentaje de Cumplimiento Normativo: {porcentaje_cumplimiento}%")
-    print(f"Dictamen del Auditor: {estado_legal}")
+    if porcentaje == 100:
+        dictamen_legal = "Compliance Completo - Nivel de Riesgo Corporativo: BAJO"
+    elif porcentaje >= 50:
+        dictamen_legal = "Compliance Parcial - Nivel de Riesgo: MODERADO. Requiere plan de adecuación inmediato."
+    else:
+        dictamen_legal = "NO COMPLIANT - Riesgo: CRÍTICO. Responsabilidad civil y contractual expuesta por falta de debida diligencia."
+        
+    # Guardar persistencia de la Auditoría Legal
+    try:
+        with sqlite3.connect('ciberdefensa.db') as conexion:
+            cursor = conexion.cursor()
+            cursor.execute('''
+                CREATE TABLE IF NOT EXISTS auditorias_iso (
+                    id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    fecha TEXT,
+                    empresa TEXT,
+                    controles_aprobados INTEGER,
+                    controles_fallidos INTEGER,
+                    porcentaje_cumplimiento REAL,
+                    estado_legal TEXT
+                )
+            ''')
+            cursor.execute('''
+                INSERT INTO auditorias_iso (fecha, empresa, controles_aprobados, controles_fallidos, porcentaje_cumplimiento, estado_legal)
+                VALUES (?, ?, ?, ?, ?, ?)
+            ''', (datetime.now().strftime("%Y-%m-%d %H:%M:%S"), empresa, aprobados, fallidos, porcentaje, dictamen_legal))
+            conexion.commit()
+    except sqlite3.Error as e:
+        print(f"[-] No se pudo registrar la auditoría corporativa: {e}")
+
+    # Impresión de Resultados en pantalla
+    print("\n" + "="*60)
+    print(f" DICTAMEN EMITIDO PARA ENTORNO: {empresa.upper()}")
     print("="*60)
-    print("[+] Evaluación registrada con éxito en la base de datos central.\n")
+    print(f"Controles validados: {aprobados}/{total_controles} ({porcentaje:.1f}%)")
+    print(f"Conclusión Legal-Técnica: {dictamen_legal}\n")
 
 if __name__ == "__main__":
     ejecutar_auditoria()
