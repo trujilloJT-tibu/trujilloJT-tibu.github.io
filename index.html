@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jesús Trujillo - Ciberdefensa & Legal Tech</title>
+    <title>Jesús Trujillo - Ciberdefensa & Legal Tech Portfolio</title>
     <link rel="stylesheet" href="estilos.css">
 </head>
 <body>
@@ -11,10 +11,11 @@
     <header>
         <div class="contenedor">
             <h1>Jesús Gregorio Trujillo Camacho</h1>
-            <p class="subtitulo">Abogado (UCA) & Estudiante de Ciberdefensa en FADENA</p>
+            <p class="subtitulo">Abogado (UCA) & Especialista en Ciberdefensa (FADENA)</p>
             <div class="contacto">
                 <span>📍 Rosario, Santa Fe, Argentina</span> | 
                 <span>📧 trujillocamachog@gmail.com</span> | 
+                <span>📱 +54 9 341 5410522</span> | 
                 <a href="https://linkedin.com/in/jesus-trujilloc" target="_blank">LinkedIn</a> | 
                 <a href="https://github.com/trujilloJT-tibu" target="_blank">GitHub</a>
             </div>
@@ -24,39 +25,50 @@
     <div class="contenedor contenido-principal">
         
         <aside class="sidebar">
-            <section class="tarjeta">
+            <section class="tarjeta perfil">
                 <h3>Perfil Profesional</h3>
-                <p>Perfil único que combina el marco regulatorio legal con capacidades técnicas operativas de ciberseguridad. Enfocado en la protección de datos, mitigación de riesgos y cumplimiento bajo estándares internacionales.</p>
+                <p>Perfil híbrido único que fusiona el marco regulatorio legal con capacidades técnicas operativas de ciberseguridad. Especializado en análisis forense, seguridad de la información (ISO 27001/NIST) y mitigación de riesgos tecnológicos bajo criterios de debida diligencia compliance.</p>
             </section>
 
-            <section class="tarjeta">
+            <section class="tarjeta competencias">
+                <h3>Formación y Competencias (FADENA)</h3>
+                <div class="grupo-materias">
+                    <h4>Sistemas e Infraestructura IoT/OT</h4>
+                    <p>Sistemas Operativos I, Tecnología Operativa, Dispositivos Remotos e Internet de las Cosas.</p>
+                </div>
+                <div class="grupo-materias">
+                    <h4>Automatización y Ciencia de Datos</h4>
+                    <p>Lenguaje de Programación (Python), Análisis Matemático I, Álgebra I, Probabilidad y Estadística.</p>
+                </div>
+                <div class="grupo-materias">
+                    <h4>Gobernanza y Gestión Legal</h4>
+                    <p>Gestión de Servicios de Información, Sociedad y Estado, Abogacía (Graduado UCA).</p>
+                </div>
+            </section>
+
+            <section class="tarjeta habilidades">
                 <h3>Habilidades Técnicas</h3>
                 <ul>
-                    <li><strong>Lenguajes:</strong> Python, SQL</li>
-                    <li><strong>Sistemas:</strong> Linux, Windows Server, IoT</li>
-                    <li><strong>Seguridad:</strong> Análisis de logs, SIEM, Firewalls</li>
-                    <li><strong>Normativas:</strong> ISO 27001, NIST, Protección de Datos</li>
+                    <li><strong>Lenguajes & BD:</strong> Python, SQL (SQLite)</li>
+                    <li><strong>Infraestructura:</strong> Linux, Seguridad IoT/OT, Redes</li>
+                    <li><strong>Defensa Activa:</strong> SIEM Log Parsing, Detección DoS</li>
+                    <li><strong>Marcos:</strong> ISO/IEC 27001, NIST, LPDP (Arg)</li>
                 </ul>
-            </section>
-
-            <section class="tarjeta">
-                <h3>Educación</h3>
-                <p><strong>Ciberdefensa</strong><br>FADENA (10 Materias Aprobadas, incl. Sistemas Operativos, IoT y Estadística)</p>
-                <p><strong>Abogacía</strong><br>Universidad Católica Argentina (UCA)</p>
             </section>
         </aside>
 
         <main class="proyectos">
-            <h2>Proyectos Destacados</h2>
+            <h2>Ecosistema de Proyectos Integrados</h2>
+            <p class="intro-proyectos">Los siguientes proyectos interactúan de forma nativa a través de una arquitectura de base de datos relacional centralizada, emulando la correlación de eventos de un entorno corporativo real.</p>
             
             <article class="tarjeta proyecto-item">
                 <div class="proyecto-header">
                     <h3>SIEM Log Parser & Incident Auditor</h3>
                     <span class="tag">Python</span>
                     <span class="tag">SQL</span>
-                    <span class="tag">ISO 27001</span>
+                    <span class="tag">OWASP Top 10</span>
                 </div>
-                <p>Desarrollo de un analizador modular de registros de auditoría web para la detección de firmas de ataques comunes (SQLi y Fuerza Bruta). Centraliza eventos críticos en una base de datos SQLite y genera reportes formateados bajo controles de la norma ISO 27001.</p>
+                <p>Desarrollo de un analizador modular de registros de auditoría web para la detección de firmas de ataques críticos (Inyección SQL y Fuerza Bruta). Normaliza la evidencia digital en una base de datos relacional e implementa funciones criptográficas para asegurar la cadena de custodia.</p>
                 <div class="proyecto-links">
                     <a href="https://github.com/trujilloJT-tibu/siem-log-parser" target="_blank" class="boton">Ver Código en GitHub</a>
                 </div>
@@ -66,12 +78,12 @@
                 <div class="proyecto-header">
                     <h3>ISO 27001 Compliance Auditor Tool</h3>
                     <span class="tag">Python</span>
-                    <span class="tag">SQL</span>
                     <span class="tag">Compliance</span>
+                    <span class="tag">GRC</span>
                 </div>
-                <p>Desarrollo de un sistema automatizado de auditoría y dictamen legal-técnico basado en controles de la norma ISO/IEC 27001. Evalúa el estado de madurez regulatoria de una organización, calcula métricas de riesgo y almacena los registros de cumplimiento en una base de datos relacional.</p>
+                <p>Sistema automatizado de auditoría y dictamen legal-técnico basado en los controles del Anexo A de la norma ISO/IEC 27001. El motor realiza consultas directas sobre la base de datos de incidentes perimetrales, penalizando de forma automatizada los niveles de cumplimiento organizacionales.</p>
                 <div class="proyecto-links">
-                    <a href="https://github.com/trujilloJT-tibu/siem-log-parser" target="_blank" class="boton">Ver Código en GitHub</a>
+                    <a href="https://github.com/trujilloJT-tibu/iso-27001-compliance" target="_blank" class="boton">Ver Código en GitHub</a>
                 </div>
             </article>
 
@@ -79,12 +91,12 @@
                 <div class="proyecto-header">
                     <h3>IoT & Network Security Monitor</h3>
                     <span class="tag">Python</span>
-                    <span class="tag">Cybersecurity</span>
                     <span class="tag">Networking</span>
+                    <span class="tag">Seguridad IoT</span>
                 </div>
-                <p>Desarrollo de un script de monitoreo de red perimetral enfocado en entornos corporativos e IoT. Analiza flujos de tráfico en tiempo real, evalúa umbrales críticos de paquetes por segundo para la mitigación preventiva de ataques de Denegación de Servicio (DoS) y genera alertas de seguridad automatizadas.</p>
+                <p>Script de monitoreo perimetral enfocado en entornos industriales e IoT/OT. Analiza flujos de tráfico en tiempo real, evalúa umbrales críticos de paquetes por segundo para la mitigación preventiva de ataques de Denegación de Servicio (DoS) e interactúa mediante pipelines de datos con el módulo SIEM.</p>
                 <div class="proyecto-links">
-                    <a href="https://github.com/trujilloJT-tibu/siem-log-parser" target="_blank" class="boton">Ver Código en GitHub</a>
+                    <a href="https://github.com/trujilloJT-tibu/iot-network-monitor" target="_blank" class="boton">Ver Código en GitHub</a>
                 </div>
             </article>
         </main>
@@ -92,7 +104,7 @@
     </div>
 
     <footer>
-        <p>&copy; 2026 Jesús Gregorio Trujillo Camacho. Desarrollado con enfoque de ciberdefensa.</p>
+        <p>&copy; 2026 Jesús Gregorio Trujillo Camacho. Código limpio, seguro y orientado a políticas de Compliance.</p>
     </footer>
 
 </body>

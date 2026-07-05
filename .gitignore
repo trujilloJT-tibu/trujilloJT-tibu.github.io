@@ -1,3 +1,12 @@
+# Excluir base de datos local (Evita fuga de información/evidencia en producción)
 *.db
+
+# Excluir archivos compilados de Python
 __pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Archivos ocultos de sistema operacional
 .DS_Store
+Thumbs.db

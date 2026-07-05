@@ -1,17 +1,18 @@
 :root {
-    --fondo: #0f172a;
-    --tarjetas: #1e293b;
-    --texto-principal: #f8fafc;
+    --fondo: #090d16;
+    --tarjetas: #131c2e;
+    --texto-principal: #f1f5f9;
     --texto-secundario: #94a3b8;
     --azul-ciber: #38bdf8;
-    --borde: #334155;
+    --borde: #1e293b;
+    --exito: #10b981;
 }
 
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
 }
 
 body {
@@ -21,32 +22,35 @@ body {
 }
 
 .contenedor {
-    max-width: 1100px;
+    max-width: 1200px;
     margin: 0 auto;
-    padding: 20px;
+    padding: 24px;
 }
 
 header {
     background-color: var(--tarjetas);
-    border-bottom: 2px solid var(--borde);
-    padding: 40px 0;
+    border-bottom: 1px solid var(--borde);
+    padding: 50px 0;
     text-align: center;
+    border-radius: 12px;
+    margin-bottom: 24px;
 }
 
 header h1 {
-    font-size: 2.5rem;
-    color: var(--texto-principal);
-    margin-bottom: 10px;
+    font-size: 2.6rem;
+    font-weight: 700;
+    letter-spacing: -0.05em;
+    margin-bottom: 12px;
 }
 
 .subtitulo {
     color: var(--azul-ciber);
-    font-size: 1.2rem;
-    font-weight: 600;
+    font-size: 1.25rem;
+    font-weight: 500;
+    margin-bottom: 15px;
 }
 
 .contacto {
-    margin-top: 15px;
     font-size: 0.9rem;
     color: var(--texto-secundario);
 }
@@ -54,52 +58,80 @@ header h1 {
 .contacto a {
     color: var(--azul-ciber);
     text-decoration: none;
-    margin: 0 5px;
+    font-weight: bold;
+    transition: color 0.2s ease;
 }
 
 .contacto a:hover {
-    text-decoration: underline;
+    color: var(--texto-principal);
 }
 
 .contenido-principal {
     display: flex;
-    gap: 30px;
-    margin-top: 30px;
+    gap: 24px;
+    padding: 0;
 }
 
 .sidebar {
     flex: 1;
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 24px;
 }
 
 .proyectos {
     flex: 2;
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 24px;
+}
+
+.proyectos h2 {
+    font-size: 1.8rem;
+    border-bottom: 2px solid var(--borde);
+    padding-bottom: 8px;
+}
+
+.intro-proyectos {
+    color: var(--texto-secundario);
+    font-size: 0.95rem;
 }
 
 .tarjeta {
     background-color: var(--tarjetas);
     border: 1px solid var(--borde);
-    border-radius: 8px;
-    padding: 20px;
+    border-radius: 12px;
+    padding: 24px;
+    transition: transform 0.2s ease, border-color 0.2s ease;
 }
 
-h2, h3 {
-    color: var(--texto-principal);
-    margin-bottom: 15px;
+.tarjeta:hover {
+    transform: translateY(-2px);
+    border-color: #334155;
+}
+
+.grupo-materias {
+    margin-bottom: 14px;
+}
+
+.grupo-materias h4 {
+    color: var(--azul-ciber);
+    font-size: 0.95rem;
+    margin-bottom: 4px;
+}
+
+.grupo-materias p {
+    font-size: 0.85rem;
+    color: var(--texto-secundario);
 }
 
 .tarjeta ul {
-    list-style-type: none;
+    list-style: none;
 }
 
 .tarjeta ul li {
-    margin-bottom: 8px;
-    font-size: 0.95rem;
+    margin-bottom: 10px;
+    font-size: 0.9rem;
 }
 
 .proyecto-header {
@@ -107,55 +139,57 @@ h2, h3 {
     flex-wrap: wrap;
     align-items: center;
     gap: 10px;
-    margin-bottom: 10px;
+    margin-bottom: 12px;
 }
 
 .tag {
-    background-color: var(--fondo);
+    background-color: rgba(56, 189, 248, 0.1);
     color: var(--azul-ciber);
-    border: 1px solid var(--azul-ciber);
-    padding: 2px 8px;
-    border-radius: 4px;
-    font-size: 0.8rem;
-    font-weight: bold;
+    border: 1px solid rgba(56, 189, 248, 0.2);
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-size: 0.75rem;
+    font-weight: 600;
 }
 
-.proyecto-links {
-    margin-top: 15px;
+.proyecto-item p {
+    color: var(--texto-secundario);
+    font-size: 0.95rem;
+    margin-bottom: 16px;
 }
 
 .boton {
     display: inline-block;
     background-color: var(--azul-ciber);
-    color: var(--fondo);
+    color: #0f172a;
     padding: 10px 20px;
-    border-radius: 5px;
+    border-radius: 8px;
     text-decoration: none;
-    font-weight: bold;
     font-size: 0.9rem;
-    transition: background 0.3s ease;
+    font-weight: 600;
+    transition: background-color 0.2s ease, transform 0.1s ease;
 }
 
 .boton:hover {
     background-color: #7dd3fc;
-}
-
-.deshabilitado {
-    opacity: 0.5;
+    transform: scale(1.02);
 }
 
 footer {
     text-align: center;
-    padding: 40px;
+    padding: 40px 0;
     color: var(--texto-secundario);
     font-size: 0.85rem;
     margin-top: 40px;
     border-top: 1px solid var(--borde);
 }
 
-/* Responsivo para celulares */
+/* Diseño Responsivo */
 @media (max-width: 768px) {
     .contenido-principal {
         flex-direction: column;
+    }
+    header h1 {
+        font-size: 2rem;
     }
 }
